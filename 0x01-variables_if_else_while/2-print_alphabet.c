@@ -1,16 +1,18 @@
 #include <stdio.h>
 /**
- * main - Entry point
- *
- * Return: Always 0 (Success)
+ * main - main block
+ * Description: prints the alphabet
+ * Return: 0
  */
 int main(void)
 {
 
-	char c;
-	for (ch = 'a'; ch <= 'z'; ch++)
-	{putchar(c);}
-		putchar('\n');
-
+	char alpha = 'a';
+	while (alpha <= 'z')
+	{
+		putchar (alpha);
+		alpha++;
+	}
+putchar('\n');
 return (0);
 }
