@@ -5,6 +5,7 @@
  *
  * Description: Start from 00:00 to 23:59
  */
+
 void jack_bauer(void)
 {
 	int x = 0;
@@ -24,7 +25,8 @@ void jack_bauer(void)
 			d = 0;
 			c++;
 		}
-		if (c > 5)
+
+												if (c > 5)
 		{
 			c = 0;
 			b++;
