@@ -1,23 +1,28 @@
 #include "main.h"
-/**
- * print_square - Entry point
- * @b: int type number
- * Return: void
- */
-void print_square(int b)
-{
-	char d = '#';
-	int c, e;
-	int a = 0;
 
-	while (a < b)
-	{
-		int n;
-		for (n = 0; n <= b; n++)
-		{
-			_putchar(d);
-		}
-		a++;
+/**
+ * print_square - print a square
+ * @size: size of square
+ * Description: can only use _putchar to print.
+ */
+
+void print_square(int size)
+{
+	int x, y;
+
+	y = 0;
+
+	if (size < 1)
 		_putchar('\n');
+	while (y < size)
+	{
+		x =0;
+		while(x < size)
+		{
+			_putchar('#');
+			x++;
+		}
+		_putchar('\n');
+		y++;
 	}
 }
