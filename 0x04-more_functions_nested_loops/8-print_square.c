@@ -1,11 +1,9 @@
 #include "main.h"
-
 /**
  * print_square - Entry point
  * @b: int type number
  * Return: void
  */
-
 void print_square(int b)
 {
 	char d = '#';
@@ -15,7 +13,6 @@ void print_square(int b)
 	while (a < b)
 	{
 		int n;
-	
 		for (n = 0; n <= b; n++)
 		{
 			_putchar(d);
