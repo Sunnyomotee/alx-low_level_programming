@@ -15,6 +15,7 @@ void print_square(int b)
 	while (a < b)
 	{
 		int n;
+	
 		for (n = 0; n <= b; n++)
 		{
 			_putchar(d);
