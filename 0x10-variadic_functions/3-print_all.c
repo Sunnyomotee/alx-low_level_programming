@@ -3,55 +3,44 @@
 #include "variadic_functions.h"
 
 /**
- * print_i - prints int
- * @list: arguement of list
- * @s: seperator
- * Return: none
+ * print_int - prints int
+ * @list: arguments from print_all
  */
 
-void print_i(va_list list, char *s)
+void print_int(va_list list)
 {
-	printf("%s%d", s, va_arg(list, int));
+	printf("%d", va_arg(list, int));
 }
 
 /**
- * print_c - prints char
- * @list: arguement char
- * @sep: seperator
+ * print_float - prints float
+ * @list: arguments from print_all
  */
 
-void print_c(va_list list, char *sep)
+void print_float(va_list list)
 {
-	printf("%s%c", sep, va_arg(list, int));
+	printf("%f", va_arg(list, double));
 }
 
 /**
- * print_s - prints string
- * @sep: seperator
- * @list: list to print
- * Return: none
+ * print_char - prints int
+ * @list: arguments from print_all
  */
 
-void print_s(va_list list, char *sep)
+void print_char(va_list list)
 {
-	char *s;
-
-	s = va_arg(list, char *);
-	if (s == NULL)
-		s = "(nil)";
-	printf("%s%s", sep, s);
+	printf("%c", va_arg(list, int));
 }
-
 /**
- * print_f - prints floats
- * @sep: float to print
- * @list: next arguement of list to print
- * Return: none
+ * print_str - prints string
+ * @list: arguments from print_all
  */
 
-void print_f(va_list list, char *sep)
+void print_str(va_list list)
 {
-	printf("%s%f", sep, va_arg(list, double));
+	char *s = va_arg(list, char *);
+
+	s == NULL ? printf("(nil)") : printf("%s", s);
 }
 
 /**
@@ -62,28 +51,28 @@ void print_f(va_list list, char *sep)
 void print_all(const char * const format, ...)
 {
 	va_list list;
-	char *sep;
-	int i, j;
+	int i = 0, j = 0;
+	char *sep = "";
 
-	fm_t fm[] = {
-		{"c", print_c},
-		{"i", print_i},
-		{"f", print_f},
-		{"s", print_s},
+	printTypeStruct printType[] = {
+		{ "i", print_int },
+		{ "f", print_float },
+		{ "c", print_char },
+		{ "s", print_str },
 		{NULL, NULL}
 	};
 	va_start(list, format);
-	i = 0;
-	sep = "";
-	while (format != NULL && format[i] != '\0')
+	while (format && format[i])
 	{
 		j = 0;
 		while (j < 4)
 		{
-			if (format[i] == *(fm[j]).fm)
+			if (*printType[j].type == format[i])
 			{
-				fm[j].p(list, sep);
+				printf("%s", sep);
+				printType[j].printer(list);
 				sep = ", ";
+				break;
 			}
 			j++;
 		}
