@@ -1,43 +1,6 @@
 #include "lists.h"
 #include <stdlib.h>
-#include <stdio.h>
-#include <stddef.h>
-
-/**
- * _strlen - gets length of the string
- * @s: string
- * Return: length of the string
- */
-
-int _strlen(const char *s)
-{
-	int i;
-
-	for (i = 0; s[i]; i++)
-		;
-	return (i);
-}
-
-/**
- * _strdup - recreation of string duplicate function
- * @src: source of string to duplicate
- * Return: pointer to malloc'd space with copied string
- */
-
-void *_strdup(const char *src)
-{
-	int len, i;
-	char *dest;
-
-	len = _strlen(src);
-	dest = malloc((len + 1) * sizeof(char));
-	if (dest == NULL)
-		return (NULL);
-	for (i = 0; src[i]; i++)
-		dest[i] = src[i];
-	dest[i] = '\0';
-	return (dest);
-}
+#include <string.h>
 
 /**
  * add_node_end - add new nodes to the end of the list
@@ -48,28 +11,25 @@ void *_strdup(const char *src)
 
 list_t *add_node_end(list_t **head, const char *str)
 {
-	list_t *new, *current;
-	char *dupstr;
+	int len = 0;
+	list_t *temp;
+	list_t *ptr = *head;
 
-	if (str == NULL)
-		return (NULL);
-	dupstr = _strdup(str);
-	if (dupstr == NULL)
-		return (NULL);
-	new = malloc(sizeof(list_t));
-	if (new == NULL)
-		return (NULL);
-	new->str = dupstr;
-	new->len = _strlen(str);
-	new->next = NULL;
+	while (str[len])
+		len++;
+	temp = malloc(sizeof(temp));
+	if (temp == NULL)
+		return (temp);
+	temp->str = strdup(str);
+	temp->len = len;
+	temp->next = NULL;
 	if (*head == NULL)
+		*head = temp;
+	else
 	{
-		*head = new;
-		return (*head);
+		while (ptr->next != NULL)
+			ptr = ptr->next;
+		ptr->next = temp;
 	}
-	current = *head;
-	while (current->next != NULL)
-		current = current->next;
-	current->next = new;
-	return (*head);
+	return (temp);
 }
